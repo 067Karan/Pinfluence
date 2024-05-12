@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+    rel="stylesheet"
+/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.1/dist/locomotive-scroll.min.js"></script>
+    <style>
+
+        ::-webkit-scrollbar {
+          width: 4px;
+          background-color: rgb(51, 51, 51);
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: rgb(122, 55, 166);
+          width: 3px;
+          padding-right: 2px;
+          height: 20px;
+          border-radius: 50%;
+        }
+
+
+    </style>
+</head>
+<body>
+        <div class="navigation relative w-full h-20 px-5 py-3 pt-2 flex items-center justify-between gap-5 bg-zinc-900 mt-0 text-white">
+            <div class="log relative ml-16">
+                <img class="rounded-full object-cover" src="/image/logo.png" alt="" width="75px" >
+            </div>
+            <div class="links flex gap-5 ml-14">
+                <a id="home" class="whitespace-nowrap font-semibold" href="/">Home</a>
+                <a class="whitespace-nowrap font-semibold" href="/feed">Explore</a><a class="whitespace-nowrap font-semibold" href="/add">Create <i class="ri-arrow-down-s-line"></i></a>
+            </div>
+            <div class="iconsnpic flex gap-6 mr-5 items-center">
+                <div class="pic flex items-center gap-4">
+                    <div class="w-8 h-8 bg-zinc-400 rounded-full overflow-hidden">
+                        <img class="w-full h-full object-cover" src="https://i.pinimg.com/75x75_RS/7c/e3/5f/7ce35f668d34ba9bafaf066ea31f1e40.jpg" alt="">
+                    </div>
+                    <i class="ri-arrow-down-s-line"></i>
+                    <a class="bg-purple-500 rounded-full px-4 py-1 justify-center font-semibold text-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+    <div class="profile w-full min-h-screen bg-zinc-900 text-white pt-1">
+        <form id="uploadform" hidden action="/fileupload" method="post" enctype="multipart/form-data">
+            <input type="file" name="image">
+        </form>
+      <div class="profdets flex flex-col items-center mt-5">
+          <div class="relative">
+            <span id="uploadicon" class="w-8 h-8 absolute bottom-0 right-0 rounded-full flex flex-center justify-center bg-zinc-200">
+                <i class="flex justify-center items-center text-zinc-800 ri-pencil-fill"></i>
+            </span>
+          
+          <div class="w-28 h-28 bg-zinc-200 rounded-full overflow-hidden">
+                  <img class="rounded-full object-cover h-full w-full" src="/images/<%= user.profileImage %>" alt="">
+                </div>
+            </div>  
+            
+        <div class="text-3xl font-semibold"><%= user.name %></div>
+        <div class="text-md"><%= user.username %></div>
+        <a href="/add" class="px-10 py-2 rounded-lg bg-purple-500 text-xs font-semibold mt-3">Add new Post</a>
+      </div>
+      <div class="cards flex flex-wrap gap-10 px-10 mt-6 ">
+        <div class="card">
+
+            <div class="w-52 h-40 bg-zinc-200 rounded-lg overflow-hidden">
+                <% if (user && user.posts && user.posts.length > 0) { %>
+                    <img class="w-full h-full object-cover rounded-lg" src="/images/<%= user.posts[user.posts.length-1].image %>" alt="">
+                  <% } else { %>
+                    <p>No posts found</p>
+                  <% } %>
+            </div>   
+            <a href="/show/posts" class="inline-block text-xl font-semibold mt-3">Your Uploaded Pins</a>
+            <h5 class="text-sm font-medium opacity-60"><%= user.posts.length %></h5>
+        </div>
+      </div>
+    </div>
+    <script>
+        document.querySelector("#uploadicon").addEventListener("click",function(){
+            document.querySelector('#uploadform input').click() ;
+        })
+        document.querySelector("#uploadform input").addEventListener("change",function(){
+            document.querySelector("#uploadform").submit();
+        })
+        
+    </script>
+    </body>
+</html>

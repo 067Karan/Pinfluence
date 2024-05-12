@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/image/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/stylesheets/pages.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.1/dist/locomotive-scroll.min.js"></script>
+    <title>user post</title>
+    <style>
+
+        ::-webkit-scrollbar {
+          width: 4px;
+          background-color: rgb(51, 51, 51);
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: rgb(122, 55, 166);
+          width: 3px;
+          padding-right: 2px;
+          height: 20px;
+          border-radius: 50%;
+        }
+
+
+    </style>
+</head>
+<body>
+        <div class="navigation relative w-full h-20 px-5 py-3 pt-2 flex items-center justify-between gap-5 bg-zinc-900 mt-0 text-white">
+            <div class="log relative ml-16">
+                <img class="rounded-full object-cover" src="/image/logo.png" alt="" width="75px" >
+            </div>
+            <div class="links flex gap-5 ml-14">
+                <a id="home" class="whitespace-nowrap font-semibold" href="/">Home</a>
+                <a class="whitespace-nowrap font-semibold" href="/feed">Explore</a><a class="whitespace-nowrap font-semibold" href="/add">Create <i class="ri-arrow-down-s-line"></i></a>
+            </div>
+            <div class="iconsnpic flex gap-6 mr-5 items-center">
+                <div class="pic flex items-center gap-4">
+                    <div class="w-8 h-8 bg-zinc-400 rounded-full overflow-hidden">
+                        <img class="w-full h-full object-cover" src="https://i.pinimg.com/75x75_RS/7c/e3/5f/7ce35f668d34ba9bafaf066ea31f1e40.jpg" alt="">
+                    </div>
+                    <i class="ri-arrow-down-s-line"></i>
+                    <a class="bg-purple-500 rounded-full px-4 py-1 justify-center font-semibold text-white" href="/logout">Logout</a>
+                </div>
+            </div>
+        </div>
+        <div class="min-w-screen min-h-screen px-10 py-8 text-white container_grid ">
+            <div class="modal w-full">
+            <div class='carousel'>
+              <div id="close-carousel">
+                <div class="x">
+                <div id="barra1"></div>
+                <div id="barra2"></div>
+                </div>
+              </div>
+              <div class="setas">
+              <div class="seta-esq">
+              <div id='prev-card'><i class="fa-solid fa-angle-left" style="color: #ffffff;"></i></div>
+              </div>
+              <div class="seta-dir">
+              <div id='next-card'><i class="fa-solid fa-angle-right" style="color: #ffffff;"></i></div>
+              </div>
+              </div>
+              <div class="centered-container">
+            <img class="modal-content" src="" alt="">
+            <figcaption></figcaption>
+                </div>
+            </div>
+            <span class="close"></span>
+            </div>
+            <div class='carousel-images w-full'>
+                <% user.posts.forEach(function(elem){ %>
+                    <div class="card_medium card_exp">
+                        <img class="img_card" src="/images/<%= elem.image %>" alt="">
+                        <figcaption><%= elem.title %></figcaption>
+                      </div>
+               <% }) %>
+              </div>
+          </div>
+          <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+          <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="/javascripts/pages.js"></script>
+    </body>
+</html>

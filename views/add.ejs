@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@4.1.1/dist/locomotive-scroll.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <style>
+        ::-webkit-scrollbar {
+            width: 4px;
+            background-color: rgb(51, 51, 51);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: rgb(122, 55, 166);
+            width: 3px;
+            padding-right: 2px;
+            height: 20px;
+            border-radius: 50%;}
+            body{
+   background-color: #000000;
+   padding: 0px;
+   margin: 0px;
+ }
+
+#gradient
+{
+  width: 100%;
+  height: 800px;
+  padding: 0px;
+  margin: 0px;
+}
+.over{
+    background: #0000004e;
+    opacity: 0.8;
+}
+
+    </style>
+</head>
+
+<body>
+    <div id="gradient">
+            <div class="over">
+                <div
+                class="navigation relative w-full h-18 px-5 py-2 pt-2 flex items-center justify-between gap-5  mt-0 text-white">
+                <div class="log relative ml-16">
+                    <img class="rounded-full object-cover" src="/image/logo.png" alt="" width="75px">
+                </div>
+                <div class="links flex gap-5 ml-14">
+                    <a id="home" class="whitespace-nowrap font-semibold" href="/">Home</a>
+                    <a class="whitespace-nowrap font-semibold" href="/feed">Explore</a><a class="whitespace-nowrap font-semibold" href="/add">Create <i class="ri-arrow-down-s-line"></i></a>
+                </div>
+                <div class="iconsnpic flex gap-6 mr-5 items-center">
+                    <div class="pic flex items-center gap-4">
+                        <div class="w-8 h-8 bg-zinc-400 rounded-full overflow-hidden">
+                            <img class="w-full h-full object-cover"
+                            src="https://i.pinimg.com/75x75_RS/7c/e3/5f/7ce35f668d34ba9bafaf066ea31f1e40.jpg" alt="">
+                        </div>
+                        <i class="ri-arrow-down-s-line"></i>
+                        <a class="bg-purple-500 rounded-full px-4 py-1 justify-center font-semibold text-white"
+                        href="/logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full min-h-screen  text-white px-10 py-5">
+                <h1 class="text-xl">Create a new post</h1>
+                <hr class="opacity-10 mt-3">
+                <form action="/createpost" method="post" enctype="multipart/form-data"><br>
+                    <input class="px-3 py-2 rounded-md mt-2 bg-purple-500 w-1/3 px-3 py-2" type="file" name="postimage" value="Select Files">
+                    <br>
+                    <input class="text-black w-1/3 px-3 py-2 border-2 rounded-md  mt-2" type="text" placeholder="Title"
+                    name="title">
+                    <br>
+                    <textarea class="text-black w-1/3 px-3 py-2 border-2 h-60 rounded-md mt-2" type="text"
+                    placeholder="Description" name="description"></textarea>
+                    <input class="text-black absolute ml-32 w-1/5 px-2  py-4 rounded-full mt-24 bg-purple-500" type="submit" value="Create Post">
+                </form>
+            </div>
+            </div>
+</div> 
+<script>
+    function color() {
+        var colors = new Array(
+  [62,35,255],
+  [60,255,60],
+  [255,35,98],
+  [45,175,230],
+  [255,0,255],
+  [255,128,0]);
+
+var step = 0;
+//color table indices for: 
+// current color left
+// next color left
+// current color right
+// next color right
+var colorIndices = [0,1,2,3];
+
+//transition speed
+var gradientSpeed = 0.002;
+
+function updateGradient()
+{
+  
+  if ( $===undefined ) return;
+  
+var c0_0 = colors[colorIndices[0]];
+var c0_1 = colors[colorIndices[1]];
+var c1_0 = colors[colorIndices[2]];
+var c1_1 = colors[colorIndices[3]];
+
+var istep = 1 - step;
+var r1 = Math.round(istep * c0_0[0] + step * c0_1[0]);
+var g1 = Math.round(istep * c0_0[1] + step * c0_1[1]);
+var b1 = Math.round(istep * c0_0[2] + step * c0_1[2]);
+var color1 = "rgb("+r1+","+g1+","+b1+")";
+
+var r2 = Math.round(istep * c1_0[0] + step * c1_1[0]);
+var g2 = Math.round(istep * c1_0[1] + step * c1_1[1]);
+var b2 = Math.round(istep * c1_0[2] + step * c1_1[2]);
+var color2 = "rgb("+r2+","+g2+","+b2+")";
+
+ $('#gradient').css({
+   background: "-webkit-gradient(linear, left top, right top, from("+color1+"), to("+color2+"))"}).css({
+    background: "-moz-linear-gradient(left, "+color1+" 0%, "+color2+" 100%)"});
+  
+  step += gradientSpeed;
+  if ( step >= 1 )
+  {
+    step %= 1;
+    colorIndices[0] = colorIndices[1];
+    colorIndices[2] = colorIndices[3];
+    
+    //pick two new target color indices
+    //do not pick the same as the current one
+    colorIndices[1] = ( colorIndices[1] + Math.floor( 1 + Math.random() * (colors.length - 1))) % colors.length;
+    colorIndices[3] = ( colorIndices[3] + Math.floor( 1 + Math.random() * (colors.length - 1))) % colors.length;
+    
+  }
+}
+
+setInterval(updateGradient,10);
+    }
+    color();
+</script>
+</body>
+</html>
